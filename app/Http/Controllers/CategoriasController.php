@@ -15,6 +15,9 @@ class CategoriasController extends Controller
     public function index()
     {
         //
+        //Consultar informacion de la base de datos
+        $datos['categorias']=Categorias::paginate(5);
+        return view('categoria.index',$datos);
     }
 
     /**
@@ -25,6 +28,7 @@ class CategoriasController extends Controller
     public function create()
     {
         //
+        return view('categoria.create');
     }
 
     /**
@@ -36,6 +40,25 @@ class CategoriasController extends Controller
     public function store(Request $request)
     {
         //
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+
+        ];
+
+        $this->validate($request,$campos,$mensaje);
+
+        //Pedir Datos formulario y quitarle el campo "token"
+        $datosCategorias = request()->except('_token');
+
+
+        //Con el modelo "Usuario" inserta los datos obtenidos en el formulario a la base de datos
+        Categorias::insert($datosCategorias);
+
+        //return response()->json($datosUsuario);
+        return redirect('categoria')->with('mensaje','Categoría agregado con éxito');
     }
 
     /**
@@ -55,9 +78,14 @@ class CategoriasController extends Controller
      * @param  \App\Models\Categorias  $categorias
      * @return \Illuminate\Http\Response
      */
-    public function edit(Categorias $categorias)
+    public function edit($id)
     {
         //
+        //Buscamos la informacion a partir del ID
+        $categoria=Categorias::findOrFail($id);
+
+        //Retornamos a la vista de editar pasandole la informacion de la categoria
+        return view('categoria.edit', compact('categoria') );
     }
 
     /**
@@ -67,9 +95,33 @@ class CategoriasController extends Controller
      * @param  \App\Models\Categorias  $categorias
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Categorias $categorias)
+    public function update(Request $request, $id)
     {
         //
+
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+        ];
+
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+
+        ];
+
+        //Se unen los campos con los mensajes
+        $this->validate($request,$campos,$mensaje);
+
+        //
+        //Pedir Datos formulario y quitarle los campos "token", method
+        $datosCategoria = request()->except(['_token','_method']);
+
+        //Buscamos el registro que tenga el id igual al id que nos estan pasando y lo actualizamos
+        Categorias::where('id','=',$id)->update($datosCategoria);
+
+        //Buscamos la informacion a partir del ID
+        $categoria=Categorias::findOrFail($id);
+
+        return redirect('categoria')->with('mensaje','Categoría Modificada');
     }
 
     /**
@@ -78,8 +130,10 @@ class CategoriasController extends Controller
      * @param  \App\Models\Categorias  $categorias
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Categorias $categorias)
+    public function destroy($id)
     {
         //
+        Categorias::destroy($id);
+        return redirect('categoria')->with('mensaje','Categoría Borrada');
     }
 }

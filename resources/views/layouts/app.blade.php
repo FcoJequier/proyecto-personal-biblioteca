@@ -34,6 +34,19 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
 
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('libro.index') }}">{{ __('Libros') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('categoria.index') }}">{{ __('Categorías') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('editorial.index') }}">{{ __('Editoriales') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('autor.index') }}">{{ __('Autores') }}</a>
+                        </li>
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->

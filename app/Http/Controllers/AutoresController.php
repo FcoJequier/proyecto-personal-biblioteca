@@ -47,7 +47,8 @@ class AutoresController extends Controller
             'Edad'=>'required|string|max:100',
         ];
         $mensaje=[
-            'required'=>'El :attribute es requerido'
+            'required'=>'El :attribute es requerido',
+            'Edad.required'=>'La edad es requerida'
 
         ];
 
@@ -56,17 +57,12 @@ class AutoresController extends Controller
         //Pedir Datos formulario y quitarle el campo "token"
         $datosAutores = request()->except('_token');
 
-        /*  Comprueba si existe una foto y luego inserta la foto en el formulario
-        if($request->hasFile('Foto')){
-            $datosUsuario['Foto']=$request->file('Foto')->store('uploads','public');
-        }
-        */
 
         //Con el modelo "Usuario" inserta los datos obtenidos en el formulario a la base de datos
         Autores::insert($datosAutores);
 
         //return response()->json($datosUsuario);
-        return redirect('autor')->with('mensaje','Autor agregado con exito');
+        return redirect('autor')->with('mensaje','Autor agregado con éxito');
     }
 
     /**
@@ -125,22 +121,11 @@ class AutoresController extends Controller
         //Pedir Datos formulario y quitarle los campos "token", method
         $datosAutor = request()->except(['_token','_method']);
 
-        /* Comprueba si existe una foto y luego inserta la foto en el formulario
-        if($request->hasFile('Foto')){
-            $usuario=Usuario::findOrFail($id);
-            Storage::delete('public/'.$usuario->Foto);
-            $datosUsuario['Foto']=$request->file('Foto')->store('uploads','public');
-        }
-        */
-
         //Buscamos el registro que tenga el id igual al id que nos estan pasando y lo actualizamos
         Autores::where('id','=',$id)->update($datosAutor);
 
         //Buscamos la informacion a partir del ID
         $autor=Autores::findOrFail($id);
-
-        //Retornamos a la vista de editar pasandole la informacion del usuario
-        //return view('usuario.edit', compact('usuario') );
 
         return redirect('autor')->with('mensaje','Autor Modificado');
     }
