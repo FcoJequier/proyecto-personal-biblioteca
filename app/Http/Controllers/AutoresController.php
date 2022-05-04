@@ -15,6 +15,9 @@ class AutoresController extends Controller
     public function index()
     {
         //
+        //Consultar informacion de la base de datos
+        $datos['autores']=Autores::paginate(5);
+        return view('autor.index',$datos);
     }
 
     /**
@@ -25,6 +28,7 @@ class AutoresController extends Controller
     public function create()
     {
         //
+        return view('autor.create');
     }
 
     /**
@@ -36,6 +40,33 @@ class AutoresController extends Controller
     public function store(Request $request)
     {
         //
+
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+            'Apellido'=>'required|string|max:100',
+            'Edad'=>'required|string|max:100',
+        ];
+        $mensaje=[
+            'required'=>'El :attribute es requerido'
+
+        ];
+
+        $this->validate($request,$campos,$mensaje);
+
+        //Pedir Datos formulario y quitarle el campo "token"
+        $datosAutores = request()->except('_token');
+
+        /*  Comprueba si existe una foto y luego inserta la foto en el formulario
+        if($request->hasFile('Foto')){
+            $datosUsuario['Foto']=$request->file('Foto')->store('uploads','public');
+        }
+        */
+
+        //Con el modelo "Usuario" inserta los datos obtenidos en el formulario a la base de datos
+        Autores::insert($datosAutores);
+
+        //return response()->json($datosUsuario);
+        return redirect('autor')->with('mensaje','Autor agregado con exito');
     }
 
     /**
@@ -55,9 +86,14 @@ class AutoresController extends Controller
      * @param  \App\Models\Autores  $autores
      * @return \Illuminate\Http\Response
      */
-    public function edit(Autores $autores)
+    public function edit($id)
     {
         //
+        //Buscamos la informacion a partir del ID
+        $autor=Autores::findOrFail($id);
+
+        //Retornamos a la vista de editar pasandole la informacion del autor
+        return view('autor.edit', compact('autor') );
     }
 
     /**
@@ -67,9 +103,46 @@ class AutoresController extends Controller
      * @param  \App\Models\Autores  $autores
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Autores $autores)
+    public function update(Request $request,$id)
     {
         //
+        $campos=[
+            'Nombre'=>'required|string|max:100',
+            'Apellido'=>'required|string|max:100',
+            'Edad'=>'required|string|max:100'
+        ];
+
+            $mensaje=[
+                'required'=>'El :attribute es requerido',
+                'Edad.required'=>'La edad es requerida'
+
+            ];
+
+        //Se unen los campos con los mensajes
+        $this->validate($request,$campos,$mensaje);
+
+        //
+        //Pedir Datos formulario y quitarle los campos "token", method
+        $datosAutor = request()->except(['_token','_method']);
+
+        /* Comprueba si existe una foto y luego inserta la foto en el formulario
+        if($request->hasFile('Foto')){
+            $usuario=Usuario::findOrFail($id);
+            Storage::delete('public/'.$usuario->Foto);
+            $datosUsuario['Foto']=$request->file('Foto')->store('uploads','public');
+        }
+        */
+
+        //Buscamos el registro que tenga el id igual al id que nos estan pasando y lo actualizamos
+        Autores::where('id','=',$id)->update($datosAutor);
+
+        //Buscamos la informacion a partir del ID
+        $autor=Autores::findOrFail($id);
+
+        //Retornamos a la vista de editar pasandole la informacion del usuario
+        //return view('usuario.edit', compact('usuario') );
+
+        return redirect('autor')->with('mensaje','Autor Modificado');
     }
 
     /**
@@ -78,8 +151,12 @@ class AutoresController extends Controller
      * @param  \App\Models\Autores  $autores
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Autores $autores)
+    public function destroy($id)
     {
         //
+        //$autor=Autores::findOrFail($idAutores);
+
+        Autores::destroy($id);
+        return redirect('autor')->with('mensaje','Autor Borrado');
     }
 }

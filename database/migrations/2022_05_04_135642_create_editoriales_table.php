@@ -13,8 +13,13 @@ class CreateEditorialesTable extends Migration
      */
     public function up()
     {
-        Schema::create('editoriales', function (Blueprint $table) {
-            $table->id();
+        Schema::create('editoriales', function (Blueprint $table) {;
+            $table->engine="InnoDB";
+            $table->bigIncrements('id');
+            $table->string('nombre');
+            $table->string('telefono');
+            $table->string('correo');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

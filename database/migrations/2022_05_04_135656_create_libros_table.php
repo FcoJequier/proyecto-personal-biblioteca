@@ -14,8 +14,20 @@ class CreateLibrosTable extends Migration
     public function up()
     {
         Schema::create('libros', function (Blueprint $table) {
-            $table->id();
+            $table->engine="InnoDB";
+            $table->bigIncrements('id');
+            $table->string('titulo');
+
+            $table->bigInteger('idAutores')->unsigned();
+            $table->bigInteger('idCategorias')->unsigned();
+            $table->bigInteger('idEditoriales')->unsigned();
+
+            $table->rememberToken();
             $table->timestamps();
+
+            $table->foreign('idAutores')->references('id')->on('autores')->onDelete("cascade");
+            $table->foreign('idCategorias')->references('id')->on('categorias')->onDelete("cascade");
+            $table->foreign('idEditoriales')->references('id')->on('editoriales')->onDelete("cascade");
         });
     }
 

@@ -13,8 +13,14 @@ class CreateAutoresTable extends Migration
      */
     public function up()
     {
+
         Schema::create('autores', function (Blueprint $table) {
-            $table->id();
+            $table->engine="InnoDB";
+            $table->bigIncrements('id');
+            $table->string('nombre');
+            $table->string('apellido');
+            $table->string('edad');
+            $table->rememberToken();
             $table->timestamps();
         });
     }
