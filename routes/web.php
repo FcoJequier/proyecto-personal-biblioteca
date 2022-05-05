@@ -28,10 +28,9 @@ Route::resource('libro',App\Http\Controllers\LibrosController::class)->middlewar
 
 Auth::routes();
 
-Route::get('/home', [LibrosController::class, 'index'])->name('home');
+Route::get('/welcome', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 //Redirije al usuario cuando se loguea
 Route::group(['middleware' => 'auth'], function () {
-
     Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
