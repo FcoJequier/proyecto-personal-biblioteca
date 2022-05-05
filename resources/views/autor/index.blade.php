@@ -19,9 +19,9 @@
 
 
 
+        <h1 align="center"> Autores </h1>
 
 
-        <a href="{{ url('autor/create') }}" class="btn btn-success">Registrar nuevo autor</a>
         <table class="table table-hover table-light">
             <thead class="thead-light">
             <tr>
@@ -72,6 +72,6 @@
         </table>
 
         {!! $autores->links() !!}
-
+            <a href="{{ url('autor/create') }}" class="btn btn-success">Registrar nuevo Autor</a>
     </div>
 @endsection

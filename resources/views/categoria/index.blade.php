@@ -19,9 +19,8 @@
 
 
 
+        <h1 align="center"> Categorías </h1>
 
-
-        <a href="{{ url('categoria/create') }}" class="btn btn-success">Registrar nueva Categoría</a>
         <table class="table table-hover table-light">
             <thead class="thead-light">
             <tr>
@@ -61,6 +60,7 @@
         </table>
 
         {!! $categorias->links() !!}
+            <a href="{{ url('categoria/create') }}" class="btn btn-success">Registrar nueva Categoría</a>
 
     </div>
 @endsection

@@ -1,5 +1,5 @@
 
-<h1> {{ $modo }} Autor</h1>
+<h1> {{ $modo }} Libro</h1>
 
 <!-- Se muestran los errores -->
 @if(count($errors)>0)
@@ -16,29 +16,29 @@
 
 
 <div>
-    <label for="Nombre"> Nombre </label>
-    <input type="text" class="form-control" name="Nombre" value="{{ isset($autor->nombre)?$autor->nombre:old('Nombre') }}" id="Nombre">
+    <label for="Titulo"> Ttulo </label>
+    <input type="text" class="form-control" name="Titulo" value="{{ isset($libro->titulo)?$libro->titulo:old('Titulo') }}" id="Titulo">
 </div>
 
 <div class="form-group">
-    <label for="Apellido"> Apellido </label>
-    <input type="text" class="form-control" name="Apellido" value="{{ isset($autor->apellido)?$autor->apellido:old('Apellido') }}" id="Apellido">
+    {{ Form::label('Autores') }}
+    {{ Form::select('idAutores', $autores, $libro->idAutores, ['class' => 'form-control' . ($errors->has('idAutores') ? ' is-invalid' : '')/*, 'placeholder' => 'idAutores'*/]) }}
+    {!! $errors->first('idAutores', '<div class="invalid-feedback">:message</p>') !!}
 </div>
 
 <div class="form-group">
-    <label for="Edad"> Edad </label>
-    <input type="text" class="form-control" name="Edad" value="{{ isset($autor->edad)?$autor->edad:old('Edad') }}" id="Edad">
+    {{ Form::label('Categorias') }}
+    {{ Form::select('idCategorias', $categorias, $libro->idCategorias, ['class' => 'form-control' . ($errors->has('idCategorias') ? ' is-invalid' : '')/*, 'placeholder' => 'idAutores'*/]) }}
+    {!! $errors->first('idCategorias', '<div class="invalid-feedback">:message</p>') !!}
 </div>
 
+<div class="form-group">
+    {{ Form::label('Editoriales') }}
+    {{ Form::select('idEditoriales', $editoriales, $libro->idEditoriales, ['class' => 'form-control' . ($errors->has('idEditoriales') ? ' is-invalid' : '')/*, 'placeholder' => 'idAutores'*/]) }}
+    {!! $errors->first('idAutores', '<div class="invalid-feedback">:message</p>') !!}
+</div>
 
-<!--
-<label for="Foto"> Foto </label>
-@--if(isset($usuario->Foto))
-<img src="{{-- asset('storage').'/'.$usuario->Foto --}}" alt="">
-@--endif
-<input type="text" name="Foto" value="" id="Foto">
--->
 <br>
 <input class="btn btn-success" type="submit" value="{{ $modo }}">
 
-<a class="btn btn-primary" href="{{ url('autor/') }}">Regresar</a>
+<a class="btn btn-primary" href="{{ url('libro/') }}">Regresar</a>

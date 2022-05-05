@@ -22,7 +22,7 @@
 
 <div class="form-group">
     <label for="Apellido"> Teléfono </label>
-    <input type="text" class="form-control" name="Telefono" value="{{ isset($editorial->telefono)?$editorial->telefono:old('Telefono') }}" id="Telefono">
+    <input type="text" class="form-control" maxlength="8" name="Telefono" value="{{ isset($editorial->telefono)?$editorial->telefono:old('Telefono') }}" id="Telefono">
 </div>
 
 <div class="form-group">

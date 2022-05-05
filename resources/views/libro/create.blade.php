@@ -3,10 +3,9 @@
 @section('content')
     <div class="container">
 
-        <!--Encriptacion de una foto => enctype="multipart/form-data" -->
-        <form action="{{ url('/autor')  }}" method="post">
+        <form action="{{ url('/libro')  }}" method="post">
             @csrf
-            @include('autor.form',
+            @include('libro.form',
                     ['modo'=>'Registrar',
                     'labelPass'=>'Contraseña',
                     'typePass'=>'password',

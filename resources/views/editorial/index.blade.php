@@ -20,8 +20,9 @@
 
 
 
+            <h1 align="center"> Editoriales </h1>
 
-        <a href="{{ url('editorial/create') }}" class="btn btn-success">Registrar nueva Editorial</a>
+
         <table class="table table-hover table-light">
             <thead class="thead-light">
             <tr>
@@ -72,6 +73,7 @@
         </table>
 
         {!! $editoriales->links() !!}
+            <a href="{{ url('editorial/create') }}" class="btn btn-success">Registrar nueva Editorial</a>
 
     </div>
 @endsection

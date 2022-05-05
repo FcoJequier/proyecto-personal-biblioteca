@@ -21,16 +21,16 @@ Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::resource('autor',AutoresController::class);
-Route::resource('categoria',CategoriasController::class);
-Route::resource('editorial',EditorialesController::class);
-Route::resource('libro',LibrosController::class);
+Route::resource('autor',App\Http\Controllers\AutoresController::class)->middleware('auth');
+Route::resource('categoria',App\Http\Controllers\CategoriasController::class)->middleware('auth');
+Route::resource('editorial',App\Http\Controllers\EditorialesController::class)->middleware('auth');
+Route::resource('libro',App\Http\Controllers\LibrosController::class)->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', [AutoresController::class, 'index'])->name('home');
+Route::get('/home', [LibrosController::class, 'index'])->name('home');
 
 //Redirije al usuario cuando se loguea
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [AutoresController::class, 'index'])->name('home');
+    Route::get('/', [LibrosController::class, 'index'])->name('home');
 });

@@ -19,37 +19,39 @@
 
 
 
+        <h1 align="center"> Libros </h1>
 
 
-        <a href="{{ url('autor/create') }}" class="btn btn-success">Registrar nuevo autor</a>
         <table class="table table-hover table-light">
             <thead class="thead-light">
             <tr>
                 <!-- <th>#</th> -->
-                <th>Nombre</th>
-                <th>Apellido</th>
-                <th>Edad</th>
+                <th>Titulo</th>
+                <th>Autor</th>
+                <th>Categoria</th>
+                <th>Editorial</th>
                 <th>Acciones</th>
             </tr>
             </thead>
             <tbody>
-            @foreach ($autores as $autor)
+            @foreach ($libros as $libro)
                 <tr>
-                    <!-- <td>{{-- $autor->id --}}</td> -->
+                    <!-- <td>{{-- $libro->id --}}</td> -->
 
-                    <td>{{ $autor->nombre }}</td>
-                    <td>{{ $autor->apellido }}</td>
-                    <td>{{ $autor->edad }}</td>
+                    <td>{{ $libro->titulo }}</td>
+                    <td>{{ $libro->autores->nombre }}</td>
+                    <td>{{ $libro->categorias->nombre }}</td>
+                    <td>{{ $libro->editoriales->nombre }}</td>
                     <td>
 
-                        <a href="{{ url('/autor/'.$autor->id.'/edit')}}" class="btn btn-warning">
+                        <a href="{{ url('/libro/'.$libro->id.'/edit')}}" class="btn btn-warning">
                             Editar
                         </a>
 
                         |
 
-                        <!-- Se envia el "$autor->id" del autor a ser borrado y se recepciona en el metodo destroy del controlador -->
-                        <form action="{{ url('/autor/'.$autor->id)}}" method="post" class="d-inline">
+                        <!-- Se envia el "$libro->id" del libro a ser borrado y se recepciona en el metodo destroy del controlador -->
+                        <form action="{{ url('/libro/'.$libro->id)}}" method="post" class="d-inline">
 
                             @csrf
                             {{ method_field('DELETE') }}
@@ -58,20 +60,13 @@
                         </form>
 
                     </td>
-                    <!--
-            <td>
-                 Sirve para mostrar una foto guardada en la carpeta storage, obteniendo la ruta desde una base de datos
-                 **Escribir en consola "php artisan storage:link"** => abre un enlace para poder comunicarse con esa carpeta
-                <img src="{{-- asset('storage').'/'.$autor->Foto --}}" alt="">
-
-            </td>
-        -->
                 </tr>
             @endforeach
             </tbody>
         </table>
 
-        {!! $autores->links() !!}
+        {!! $libros->links() !!}
+            <a href="{{ url('libro/create') }}" class="btn btn-success">Registrar nuevo Libro</a>
 
     </div>
 @endsection

@@ -3,11 +3,11 @@
 @section('content')
     <div class="container">
 
-        <form action="{{ url('/autor/'.$autor->id)  }}" method="post">
+        <form action="{{ url('/libro/'.$libro->id)  }}" method="post">
             @csrf
             {{ method_field('PATCH') }}
 
-            @include('autor.form',
+            @include('libro.form',
                     ['modo'=>'Editar',
                     'labelPass'=>'',
                     'typePass'=>'hidden',

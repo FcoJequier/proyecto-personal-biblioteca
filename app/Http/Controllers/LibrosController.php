@@ -31,7 +31,13 @@ class LibrosController extends Controller
     public function create()
     {
         //
-        return view('libro.create');
+        $libro = new Libros();
+
+        $autores = Autores::pluck('nombre','id');
+        $categorias = Categorias::pluck('nombre','id');
+        $editoriales = Editoriales::pluck('nombre','id');
+
+        return view('libro.create', compact('libro','autores','categorias','editoriales'));
     }
 
     /**
@@ -44,9 +50,7 @@ class LibrosController extends Controller
     {
         //
         $campos=[
-            'Nombre'=>'required|string|max:100',
-            'Apellido'=>'required|string|max:100',
-            'Edad'=>'required|string|max:100',
+            'Titulo'=>'required|string|max:100'
         ];
         $mensaje=[
             'required'=>'El :attribute es requerido',
@@ -90,8 +94,12 @@ class LibrosController extends Controller
         //Buscamos la informacion a partir del ID
         $libro=Libros::findOrFail($id);
 
+        $autores = Autores::pluck('nombre','id');
+        $categorias = Categorias::pluck('nombre','id');
+        $editoriales = Editoriales::pluck('nombre','id');
+
         //Retornamos a la vista de editar pasandole la informacion del libro
-        return view('libro.edit', compact('libro') );
+        return view('libro.edit', compact('libro','autores','categorias','editoriales') );
     }
 
     /**
@@ -105,9 +113,7 @@ class LibrosController extends Controller
     {
         //
         $campos=[
-            'Nombre'=>'required|string|max:100',
-            'Apellido'=>'required|string|max:100',
-            'Edad'=>'required|string|max:100'
+            'Titulo'=>'required|string|max:100'
         ];
 
         $mensaje=[
