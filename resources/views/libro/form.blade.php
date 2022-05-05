@@ -1,4 +1,3 @@
-
 <h1> {{ $modo }} Libro</h1>
 
 <!-- Se muestran los errores -->

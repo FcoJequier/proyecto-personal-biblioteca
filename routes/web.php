@@ -18,7 +18,7 @@ use App\Http\Controllers\LibrosController;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('welcome');
 });
 
 Route::resource('autor',App\Http\Controllers\AutoresController::class)->middleware('auth');
@@ -32,5 +32,6 @@ Route::get('/home', [LibrosController::class, 'index'])->name('home');
 
 //Redirije al usuario cuando se loguea
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/', [LibrosController::class, 'index'])->name('home');
+
+    Route::get('/home', [\App\Http\Controllers\HomeController::class, 'index'])->name('home');
 });
