@@ -5,12 +5,7 @@
 
         <form action="{{ url('/libro')  }}" method="post">
             @csrf
-            @include('libro.form',
-                    ['modo'=>'Registrar',
-                    'labelPass'=>'Contraseña',
-                    'typePass'=>'password',
-                    'labelCorreo'=>'Correo',
-                    'typeCorreo'=>'text'])
+            @include('libro.form',['modo'=>'Registrar'])
 
         </form>
 

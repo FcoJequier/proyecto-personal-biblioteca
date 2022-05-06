@@ -21,6 +21,7 @@ class LibrosController extends Controller
         //Consultar informacion de la base de datos
         $datos['libros']=Libros::paginate(6);
         return view('libro.index',$datos);
+
     }
 
     /**

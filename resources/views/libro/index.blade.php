@@ -3,8 +3,6 @@
 @section('content')
     <div class="container">
 
-
-
         @if (Session::has('mensaje'))
             <div class="alert alert-success alert-dismissible fade show" role="alert">
 
