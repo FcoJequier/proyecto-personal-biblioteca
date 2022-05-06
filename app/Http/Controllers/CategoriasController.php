@@ -16,7 +16,7 @@ class CategoriasController extends Controller
     {
         //
         //Consultar informacion de la base de datos
-        $datos['categorias']=Categorias::paginate(5);
+        $datos['categorias']=Categorias::paginate(6);
         return view('categoria.index',$datos);
     }
 

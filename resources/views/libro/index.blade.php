@@ -11,7 +11,7 @@
                 {{ Session::get('mensaje') }}
                 <br>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true"></span>
                 </button>
             </div>
         @endif
@@ -22,7 +22,7 @@
         <h1 align="center"> Libros </h1>
 
 
-        <table class="table table-hover table-light">
+        <table class="table table-hover table-light table-responsive">
             <thead class="thead-light">
             <tr>
                 <!-- <th>#</th> -->
@@ -39,7 +39,7 @@
                     <!-- <td>{{-- $libro->id --}}</td> -->
 
                     <td>{{ $libro->titulo }}</td>
-                    <td>{{ $libro->autores->nombre }}</td>
+                    <td>{{ $libro->autores->nombre.' '.$libro->autores->apellido}}</td>
                     <td>{{ $libro->categorias->nombre }}</td>
                     <td>{{ $libro->editoriales->nombre }}</td>
                     <td>

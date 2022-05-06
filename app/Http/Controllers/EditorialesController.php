@@ -16,7 +16,7 @@ class EditorialesController extends Controller
     {
         //
         //Consultar informacion de la base de datos
-        $datos['editoriales']=Editoriales::paginate(5);
+        $datos['editoriales']=Editoriales::paginate(6);
         return view('editorial.index',$datos);
     }
 

@@ -21,7 +21,7 @@
 
 <div class="form-group">
     {{ Form::label('Autores') }}
-    {{ Form::select('idAutores', $autores, $libro->idAutores, ['class' => 'form-control' . ($errors->has('idAutores') ? ' is-invalid' : '')/*, 'placeholder' => 'idAutores'*/]) }}
+    {{ Form::select('idAutores', $autores , $libro->idAutores, ['class' => 'form-control' . ($errors->has('idAutores') ? ' is-invalid' : '')/*, 'placeholder' => 'idAutores'*/]) }}
     {!! $errors->first('idAutores', '<div class="invalid-feedback">:message</p>') !!}
 </div>
 

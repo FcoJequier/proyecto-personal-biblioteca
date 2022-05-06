@@ -31,7 +31,7 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase" id="mainNav">
+        <nav class="navbar navbar-expand-lg bg-secondary text-uppercase mt-auto ms-auto" id="mainNav">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}

@@ -16,7 +16,7 @@ class AutoresController extends Controller
     {
         //
         //Consultar informacion de la base de datos
-        $datos['autores']=Autores::paginate(5);
+        $datos['autores']=Autores::paginate(6);
         return view('autor.index',$datos);
     }
 

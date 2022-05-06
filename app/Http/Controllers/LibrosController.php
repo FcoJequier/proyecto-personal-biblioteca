@@ -19,7 +19,7 @@ class LibrosController extends Controller
     {
         //
         //Consultar informacion de la base de datos
-        $datos['libros']=Libros::paginate(5);
+        $datos['libros']=Libros::paginate(6);
         return view('libro.index',$datos);
     }
 
@@ -64,10 +64,9 @@ class LibrosController extends Controller
         $datosLibros = request()->except('_token');
 
 
-        //Con el modelo "Usuario" inserta los datos obtenidos en el formulario a la base de datos
+        //Con el modelo "Libros" inserta los datos obtenidos en el formulario a la base de datos
         Libros::insert($datosLibros);
 
-        //return response()->json($datosUsuario);
         return redirect('libro')->with('mensaje','Libro agregado con éxito');
     }
 
